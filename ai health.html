@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Workout and Diet Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 50%;
+            margin: auto;
+            padding: 20px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-group label {
+            display: block;
+        }
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+        }
+        .btn {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #218838;
+        }
+        .main{
+            height: 60px;
+            width: 1400px;
+            text-align: center;
+            background-color: darkgrey;
+            color: orange;
+            margin: auto;
+            font-size: 30px;
+        }
+        body{
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <h1>AI DIET & WORKOUT GENERATOR</h1>
+    </div>
+    <div class="container">
+        <h1>AI Workout and Diet Generator</h1>
+        <form id="user-input-form">
+            <div class="input-group">
+                <label for="age">Age</label>
+                <input type="number" id="age" name="age" required>
+            </div>
+            <div class="input-group">
+                <label for="height">Height (cm)</label>
+                <input type="number" id="height" name="height" required>
+            </div>
+            <div class="input-group">
+                <label for="weight">Weight (kg)</label>
+                <input type="number" id="weight" name="weight" required>
+            </div>
+            <div class="input-group">
+                <label for="goal">Goal</label>
+                <select id="goal" name="goal" required>
+                    <option value="lose_weight">Lose Weight</option>
+                    <option value="gain_muscle">Gain Muscle</option>
+                    <option value="maintain_fitness">Maintain Fitness</option>
+                </select>
+            </div>
+            <button type="submit" class="btn">Generate Plan</button>
+        </form>
+        <div id="output"></div>
+    </div>
+    <script>
+        document.getElementById('user-input-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const age = document.getElementById('age').value;
+            const height = document.getElementById('height').value;
+            const weight = document.getElementById('weight').value;
+            const goal = document.getElementById('goal').value;
+
+            const workoutPlan = generateWorkoutPlan(goal);
+            const dietPlan = generateDietPlan(age, height, weight);
+
+            document.getElementById('output').innerHTML = `
+                <h2>Your Personalized Plan</h2>
+                <h3>Workout Plan</h3>
+                <p>${workoutPlan}</p>
+                <h3>Diet Plan</h3>
+                <p>${dietPlan}</p>
+            `;
+        });
+
+        function generateWorkoutPlan(goal) {
+            switch(goal) {
+                case 'lose_weight':
+                    return 'Weekly Workout Plan<br><br><mark>Monday:</mark><br><br> Cardio and CoreWarm-Up: 5-10 minutes of light jogging or brisk walking cardio: 20-30 minutes of running or joggingCore Workout:Plank: 3 sets of 30-60 secondsBicycle Crunches: 3 sets of 15 reps per sideRussian Twists: 3 sets of 20 repsCool Down: 5-10 minutes of stretching.<br><br><mark>Tuesday:</mark><br><br> Strength Training (Upper Body)Warm-Up: 5-10 minutes of jump rope or light cardioStrength Exercises:Push-Ups: 3 sets of 10-15 repsDumbbell Shoulder Press: 3 sets of 12 repsDumbbell Bicep Curls: 3 sets of 12 repsTricep Dips: 3 sets of 10-15 repsCool Down: 5-10 minutes of stretching <br><br><mark>Wednesday:</mark><br><br> Active Recovery Activity: 30-60 minutes of light activity (e.g., walking, yoga, or stretching) <br><br> <mark>Thursday:</mark><br><br> Cardio and Lower BodyWarm-Up: 5-10 minutes of jumping jacks or light cardioCardio: 20-30 minutes of cycling or swimmingLower Body Workout:Squats: 3 sets of 15 repsLunges: 3 sets of 12 reps per legCalf Raises: 3 sets of 20 repsCool Down: 5-10 minutes of stretching <br><br><mark>Friday:</mark><br><br> HIIT (High-Intensity Interval Training)Warm-Up: 5-10 minutes of light jogging or brisk walkingHIIT Workout (repeat the circuit 3 times, 30 seconds work, 30 seconds rest):BurpeesMountain ClimbersHigh KneesJump SquatsCool Down: 5-10 minutes of stretching <br><br><mark>Saturday:</mark><br><br> Strength Training (Full Body)Warm-Up: 5-10 minutes of jump rope or lightcardioStrength Exercises:Push-Ups: 3 sets of 10-15 repsDumbbell Rows: 3 sets of 12 repsSquats: 3 sets of 15 repsPlank: 3 sets of 30-60 seconds Cool Down: 5-10 minutes of stretching <br><br><mark>Sunday:</mark><br><br> Rest DayActivity: Focus on rest and recovery, light stretching or a gentle walk if desired';
+                case 'gain_muscle':
+                    return 'Your workout plan for gaining muscle includes strength training exercises like weight lifting, resistance training, and bodyweight exercises.<br><br><mark>Day 1: Upper Body</mark><br>Warm-Up: 5-10 minutes of light cardio (jumping jacks, brisk walking)<br>Exercises:<br>Push-Ups: 3 sets of 10-15 reps<br>dumbbell Bench Press: 3 sets of 8-12 reps<br>Bent Over Rows: 3 sets of 8-12 reps<br>Dumbbell Shoulder Press: 3 sets of 8-12 reps<br>Bicep Curls: 3 sets of 10-15 reps<br>Tricep Dips: 3 sets of 10-15 reps<br>Cool Down: 5-10 minutes of stretching<br><br><mark>Day 2: Lower Body</mark><br>Warm-Up: 5-10 minutes of light cardio (high knees, butt kicks)<br>Exercises:<br>Squats: 3 sets of 10-15 reps<br>Lunges: 3 sets of 10-15 reps per leg<br>Leg Press: 3 sets of 8-12 reps<br>Deadlifts: 3 sets of 8-12 reps<br>Calf Raises: 3 sets of 15-20 reps<br>Cool Down: 5-10 minutes of stretching<br><br><mark>Day 3: Rest or Active Recovery</mark><br>Light activities like walking, yoga, or gentle stretching<br><br><mark>Day 4: Upper Body</mark><br>Warm-Up: 5-10 minutes of light cardio<br>Exercises:<br>Pull-Ups or Lat Pulldowns: 3 sets of 8-12 reps<br>Dumbbell Flyes: 3 sets of 10-15 reps<br>Seated Rows: 3 sets of 8-12 reps<br>Lateral Raises: 3 sets of 10-15 reps<br>Hammer Curls: 3 sets of 10-15 reps<br>Tricep Extensions: 3 sets of 10-15 reps<br>Cool Down: 5-10 minutes of stretching<br><br><mark>Day 5: Lower Body</mark><br>Warm-Up: 5-10 minutes of light cardio<br>Exercises:<br>Bulgarian Split Squats: 3 sets of 10-12 reps per leg<br>Leg Curls: 3 sets of 8-12 reps<br>Step-Ups: 3 sets of 10-12 reps per leg<br>Glute Bridges: 3 sets of 15 reps<br>Standing Calf Raises: 3 sets of 15-20 reps<br>Cool Down: 5-10 minutes of stretching<br><br><mark>Day 6: Full Body or Cardio</mark><br>Warm-Up: 5-10 minutes of light cardio<br>Exercises (Choose a mix of upper and lower body exercises):<br>dumbbell Squat to Press: 3 sets of 10-15 reps<br>Kettlebell Swings: 3 sets of 15-20 reps<br>Mountain Climbers: 3 sets of 30-45 seconds<br>Plank: 3 sets of 30-60 seconds<br>Cool Down: 5-10 minutes of stretching<br><br><mark>Day 7: Rest or Active Recovery</mark><br>Light activities like walking, yoga, or gentle stretching';
+                case 'maintain_fitness<br><br><mark>Day 1: Cardio and Core</mark><br>Warm-Up: 5-10 minutes of light cardio (jumping jacks, brisk walking)<br>Cardio Exercises:<br>Running or Cycling: 20-30 minutes at a moderate pace<br>Core Exercises:<br>Plank: 3 sets of 30-60 seconds<br>Russian Twists: 3 sets of 20 reps (10 each side)<br>Bicycle Crunches: 3 sets of 20 reps<br>Cool Down: 5-10 minutes of stretching<br><br><mark>Day 2: Upper Body Strength</mark><br>Warm-Up: 5-10 minutes of light cardio<br>Exercises:<br>Push-Ups: 3 sets of 10-15 reps<br>Dumbbell Bench Press: 3 sets of 10-12 reps<br>Bent Over Rows: 3 sets of 10-12 reps<br>Dumbbell Shoulder Press: 3 sets of 10-12 reps<br>Bicep Curls: 3 sets of 12-15 reps<br>Tricep Dips: 3 sets of 12-15 reps<br>Cool Down: 5-10 minutes of stretchin<br><br><mark>Day 3: Lower Body Strength</mark><br>Warm-Up: 5-10 minutes of light cardio<br>Exercises:<br>Squats: 3 sets of 15 reps<br>Lunges: 3 sets of 12 reps per leg<br>Leg Press: 3 sets of 10-12 reps<br>Deadlifts: 3 sets of 10-12 reps<br>Calf Raises: 3 sets of 15-20 reps<br>Cool Down: 5-10 minutes of stretching<br><br><mark>Day 4: Active Recovery</mark><br>Light activities like walking, yoga, or gentle stretching<br><br><mark>Day 5: Full Body Circuit</mark><br>Warm-Up: 5-10 minutes of light cardio<br>Circuit Exercises (perform each for 45 seconds, rest for 15 seconds, repeat the circuit 3 times):<br>Jumping Jacks<br>Bodyweight Squats<br>Push-Ups<br>Plank<br>Mountain Climbers<br>Dumbbell Rows<br>Cool Down: 5-10 minutes of stretching<br><br><mark>Day 6: Flexibility and Balance</mark><br>Warm-Up: 5-10 minutes of light cardio<br>Exercises:<br>Yoga or Pilates: 30-45 minutes<br>Balance Exercises (e.g., standing on one leg, balance board): 10-15 minutes<br>Cool Down: 5-10 minutes of stretching<br><br><mark>Day 7: Rest or Light Activity</mark><br>Gentle stretching, walking, or another low-intensity activity':
+                    return 'Your workout plan for maintaining fitness includes a balanced mix of cardio and strength training exercises.';
+                default:
+                    return 'Please select a valid goal.';
+            }
+        }
+
+        function generateDietPlan(age, height, weight) {
+            if (age < 18) {
+                return `As a teenager, it is important to have a balanced diet that includes fruits, vegetables, whole grains, and proteins. Ensure you eat enough to support your growth.<br><br><mark>Leafy Greens (Spinach, Kale, Lettuce)</mark><br><br> Calories: ~25-35 per cup <br>Benefits: Low in calories, high in fiber and nutrients, helps fill you up without adding many calories.<br><br><mark>Berries (Strawberries, Blueberries, Raspberries)</mark><br><br>
+Calories: ~50-85 per cup<br>
+Benefits: Low in calories, high in antioxidants and fiber, can satisfy sweet cravings.<br><br>      <mark>Chickpeas (Garbanzo Beans)<br></mark><br>
+
+Calories: ~120 per 1/2 cup (cooked)<br>
+Benefits: High in protein and fiber, versatile for various dishes, helps keep you full.<br><br><mark>Almonds</mark><br><br>
+
+Calories: ~160 per 1 ounce (about 23 almonds)<br>
+Benefits: High in healthy fats, fiber, and protein, good for snacking in moderation.<br><br><mark>Green Tea</mark><br><br>
+
+Calories: ~2 per cup (without added sugar)<br>
+Benefits: Contains antioxidants and can boost metabolism, low in calories, and a good alternative to sugary drinks.<br>
+
+`;
+            } else if (age < 50) {
+                return `For an adult of ${height} cm and ${weight} kg, maintain a diet rich in vegetables, lean proteins, and whole grains. Avoid excessive sugars and fats.<mark>Breakfast:</mark><br>
+
+Option 1: Smoothie with spinach, banana, berries, almond milk, and a scoop of plant-based protein powder.
+Option 2: Oatmeal topped with nuts, seeds, and fresh fruit.
+Option 3: Whole grain toast with avocado and a side of mixed berries.`;
+            } else {
+                return `For individuals over 50, focus on nutrient-dense foods that support bone health and reduce the risk of chronic diseases. Include plenty of fiber, calcium, and vitamin D.`;
+            }
+        }
+    </script>
+</body>
+</html>
